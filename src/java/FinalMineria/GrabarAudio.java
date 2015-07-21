@@ -6,8 +6,6 @@
 package FinalMineria;
 
 import Herramientas.Grabador;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,11 +40,8 @@ public class GrabarAudio extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String accion = request.getParameter("accion");
-        nombre = request.getParameter("nombreSeleccionado");
-        BufferedReader br = null;         
-        br = new BufferedReader(new FileReader("C:\\Users\\Enmanuel\\openSMILE-2.1.0\\nombres.txt"));
-        linea = br.readLine();
-        br.close();  
+        nombre = request.getParameter("nombreSeleccionado");       
+        linea = "enmanuel,candido"; 
         String[] nombres = linea.split(",");
         if("entrenar".equals(accion))
         {
@@ -62,7 +57,7 @@ public class GrabarAudio extends HttpServlet {
             } catch (InterruptedException ex) {
                 Logger.getLogger(GrabarAudio.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Runtime.getRuntime().exec("cmd /c C:\\Users\\Enmanuel\\openSMILE-2.1.0\\SMILExtract_Release.exe -C C:\\Users\\Enmanuel\\openSMILE-2.1.0\\config\\IS12_speaker_trait.conf -I C:\\Users\\Enmanuel\\grabacionnull.wav -O C:\\Users\\Enmanuel\\openSMILE-2.1.0\\prueba.arff -instname Persona -classes {"+linea+"} -classlabel "+nombre);
+            Runtime.getRuntime().exec("cmd /c C:\\Users\\Enmanuel\\openSMILE-2.1.0\\SMILExtract_Release.exe -C C:\\Users\\Enmanuel\\openSMILE-2.1.0\\config\\IS12_speaker_trait.conf -I C:\\Users\\Enmanuel\\grabacion.wav -O C:\\Users\\Enmanuel\\openSMILE-2.1.0\\base.arff -instname Persona -classes {"+linea+"} -classlabel "+nombre);
             response.sendRedirect("./index.jsp");
             
         }
@@ -71,7 +66,7 @@ public class GrabarAudio extends HttpServlet {
 //            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //            Date date = new Date();
 //            String nombre = request.getParameter("nombreSeleccionado");
-            grabar = new Grabador("grabacion");
+            grabar = new Grabador();
             Thread stopper = new Thread(new Runnable() {
             public void run() {
                 try {
