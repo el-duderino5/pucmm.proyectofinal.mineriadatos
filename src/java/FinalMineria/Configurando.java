@@ -52,24 +52,16 @@ public class Configurando extends HttpServlet {
                 else
                     nombres = nombres.concat(","+request.getParameter("Persona#"+String.valueOf(i)));
             }
-            String contenido = "cmd /c C:\\Users\\Enmanuel\\openSMILE-2.1.0\\SMILExtract_Release.exe -C C:\\Users\\Enmanuel\\openSMILE-2.1.0\\config\\MCFF.conf -I C:\\Users\\Enmanuel\\openSMILE-2.1.0\\example-audio\\opensmile.wav -O C:\\Users\\Enmanuel\\openSMILE-2.1.0\\baseDatos.arff -instname Persona -classes {"+nombres+"}";
-            File file = new File("C:\\Users\\Enmanuel\\openSMILE-2.1.0\\Confclases.txt");
+            
+           File file = new File("C:\\Users\\Enmanuel\\openSMILE-2.1.0\\nombres.txt");
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            String contenido = nombres;            
             if (!file.exists()) {
                 file.createNewFile();
             }
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(fw);
             bw.write(contenido);
-            String contenido2 = nombres;
-            File file2 = new File("C:\\Users\\Enmanuel\\openSMILE-2.1.0\\nombres.txt");
-            if (!file2.exists()) {
-                file2.createNewFile();
-            }
-            fw = new FileWriter(file2.getAbsoluteFile());
-            BufferedWriter bw2 = new BufferedWriter(fw);
-            bw2.write(contenido2);
             bw.close();
-            bw2.close();
             response.sendRedirect("./index.jsp");
         }
         
