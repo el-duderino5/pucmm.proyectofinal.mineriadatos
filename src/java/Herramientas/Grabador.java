@@ -9,11 +9,11 @@ import java.io.*;
 public class Grabador {
    
     String nombre;
-    public Grabador(String Nombre){
-        nombre = Nombre;
+    public Grabador(){
+       
     }
     
-    File wavFile = new File("C:\\Users\\Enmanuel\\grabacion"+nombre+".wav");
+    File wavFile = new File("C:\\Users\\Enmanuel\\grabacion.wav");
     AudioFileFormat.Type fileType = AudioFileFormat.Type.WAVE;
     TargetDataLine line;
 
